@@ -3,7 +3,7 @@ async function main() {
   // Creating the map object
   const myMap = L.map("map", {
     center: [37.09024, -95.712891],
-    zoom: 4
+    zoom: 3.5
     // layers: [streetMap, quakeMarkers]
   });
 
@@ -130,14 +130,14 @@ async function main() {
 var legend= L.control({position: 'bottomright'});
 legend.onAdd=function(myMap){
     var div=L.DomUtil.create('div','legend');
-    var labels = ['<strong>grades</strong>']
-    var grades = ['-10-10','10-30','30-50','50-70','70-90','90+'];
-    var colors =['green','lightgreen','yellow','light yellow', 'orange','red']
+    var labels = ['<strong>depth</strong>']
+    var depth = ['-10-10','10-30','30-50','50-70','70-90','90+'];
+    var colors =['lightgreen','green','yellow','orange','red', 'crimson']
     div.innerHTML='<div><b>Legend</b></div';
-    for(var i = 0; i<grades.length; i++){
+    for(var i = 0; i<depth.length; i++){
         labels.push(
         div.innerHTML +=  "<i style='background:" + colors[i] + "'></i> " +
-        grades[i] + (grades[i + 1] ? ""  + "<br>" : ""));
+        depth[i] + (depth[i + 1] ? ""  + "<br>" : ""));
         labels.push(
          div.innerHTML +=  "<i style='background:" + colors[i] + "'></i> " +
         colors[i] + (colors[i + 1] ? ""  + "<br>" : ""))
