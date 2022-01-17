@@ -146,14 +146,14 @@ async function main() {
 
 
 // THIRD OPTION
-  // function getColor(d) {
-  //   return d > 90 ? 'crimson' :
-  //         d > 70  ? 'tomato' :
-  //         d > 50  ? 'orange' :
-  //         d > 30  ? 'yellow' :
-  //         d > 10   ? 'green' :
-  //         'lightgreen';
-  // }
+  function getColor(d) {
+    return d > 90 ? 'crimson' :
+          d > 70  ? 'tomato' :
+          d > 50  ? 'orange' :
+          d > 30  ? 'yellow' :
+          d > 10   ? 'green' :
+          'lightgreen';
+  }
 
   // var legend= L.control({position: 'bottomright'});
 
@@ -173,49 +173,47 @@ async function main() {
   // legend.addTo(myMap)
 
   // FOURTH OPTION
-  // var legend = L.control({position: 'bottomright'});
-
-  // legend.onAdd = function (map) {
+  let legend = L.control({position: 'bottomright'});
+  legend.onAdd = function (myMap) {
+  var div = L.DomUtil.create('div', 'info legend');
+  var depth = [0, 10, 30, 50, 70, 90];
+  var legendtitle = "<h4> Earthquake Depth (km)</h4>";
+  div.innerHTML = legendtitle
+      // loop through our density intervals and generate a label with a colored square for each interval
+  for (var i = 0; i < depth.length; i++) {
+      div.innerHTML += 
+          '<i style="background:' + getColor(depth[i] + 1) + '"></i> ' +
+          depth[i] + (depth[i + 1] ? '&ndash;' + depth[i + 1] + '<br>' : '+');
+   }
   
-  //     var div = L.DomUtil.create('div', 'info legend'),
-  //         grades = [0, 10, 20, 50, 100, 200, 500, 1000],
-  //         labels = [];
+  return div;
+  };
   
-  //     // loop through our density intervals and generate a label with a colored square for each interval
-  //     for (var i = 0; i < grades.length; i++) {
-  //         div.innerHTML += 
-  //             '<i style="background:' + getColor(grades[i] + 1) + '"></i> ' +
-  //             grades[i] + (grades[i + 1] ? '&ndash;' + grades[i + 1] + '<br>' : '+');
-  //     }
-  
-  //     return div;
-  // };
-  
-  // legend.addTo(map);
+  legend.addTo(myMap);
 
 // FIFTH OPTION
-var legend= L.control({position: 'bottomright'});
-legend.onAdd=function(myMap){
-    var div=L.DomUtil.create('div','legend');
-    var depth=[
-        "0 - 10", "10 - 30", "30 - 50", "50 - 70", "70 - 90", "90+"
-    ];
-    var colors= [
-        'lightgreen', 'green', 'yellow', 'orange', 'tomato', 'crimson'
-    ];
-    //create title
-    var legendtitle="<h4> Earthquake Depth (km)</h4>";
-    div.innerHTML=legendtitle
-    // create labels array for legend values
-    var labels=[];
-    for (var i = 0; i < depth.length; i++) {
-        div.innerHTML += labels.push(
-          "<i style='background: " + colors[i] + "'></i> " +
-          depth[i] + (depth[i + 1] ? ""  + "<br>" : ""));
-        }
-        return div;
-      };
-legend.addTo(myMap)
+// var legend= L.control({position: 'bottomright'});
+// legend.onAdd=function(){
+//     var div=L.DomUtil.create('div','legend');
+//     var depth=[
+//         "0 - 10", "10 - 30", "30 - 50", "50 - 70", "70 - 90", "90+"
+//     ];
+//     var colors= [
+//         'lightgreen', 'green', 'yellow', 'orange', 'tomato', 'crimson'
+//     ];
+//     //create title
+//     var legendtitle="<h4> Earthquake Depth (km)</h4>";
+//     div.innerHTML=legendtitle
+//     // create labels array for legend values
+//     var labels=[];
+//     for (var i = 0; i < depth.length; i++) {
+//         div.innerHTML += labels.push(
+//           "<i style='background: " + colors[i] + "'></i> " +
+//           depth[i] + (depth[i + 1] ? ""  + "<br>" : ""));
+//         }
+//         return div;
+//       };
+// legend.addTo(myMap)
 
 }
 
